@@ -1,0 +1,257 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Light ice blue background */
+    --background: 195 35% 92%;
+    --foreground: 170 80% 12%;
+
+    /* White cards on light background */
+    --card: 0 0% 100%;
+    --card-foreground: 170 80% 12%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 170 80% 12%;
+
+    /* Dark teal primary */
+    --primary: 170 80% 12%;
+    --primary-foreground: 195 35% 92%;
+
+    /* Lighter teal for hover/accents */
+    --primary-light: 195 35% 85%;
+    --primary-hover: 170 75% 18%;
+
+    /* Lime green accent */
+    --secondary: 80 100% 72%;
+    --secondary-foreground: 170 80% 12%;
+
+    --muted: 195 25% 88%;
+    --muted-foreground: 170 40% 35%;
+
+    /* Light teal accent */
+    --accent: 175 50% 80%;
+    --accent-foreground: 170 80% 12%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 195 25% 85%;
+    --input: 195 25% 85%;
+    --ring: 170 80% 12%;
+
+    --radius: 0.75rem;
+
+    /* Custom tokens */
+    --gradient-primary: linear-gradient(135deg, hsl(170, 80%, 12%) 0%, hsl(175, 70%, 18%) 100%);
+    --gradient-hero: linear-gradient(180deg, hsl(195, 35%, 92%) 0%, hsl(195, 30%, 95%) 100%);
+    --shadow-card: 0 4px 24px -4px hsl(170 80% 12% / 0.08);
+    --shadow-card-hover: 0 12px 40px -8px hsl(170 80% 12% / 0.15);
+    --shadow-button: 0 4px 16px -4px hsl(170 80% 12% / 0.3);
+
+    --sidebar-background: 195 35% 95%;
+    --sidebar-foreground: 170 80% 12%;
+    --sidebar-primary: 170 80% 12%;
+    --sidebar-primary-foreground: 195 35% 92%;
+    --sidebar-accent: 195 25% 88%;
+    --sidebar-accent-foreground: 170 80% 12%;
+    --sidebar-border: 195 25% 85%;
+    --sidebar-ring: 170 80% 12%;
+  }
+
+  .dark {
+    --background: 170 80% 6%;
+    --foreground: 195 35% 92%;
+
+    --card: 170 70% 10%;
+    --card-foreground: 195 35% 92%;
+
+    --popover: 170 70% 10%;
+    --popover-foreground: 195 35% 92%;
+
+    --primary: 80 100% 72%;
+    --primary-foreground: 170 80% 12%;
+
+    --primary-light: 170 60% 20%;
+    --primary-hover: 80 100% 65%;
+
+    --secondary: 170 70% 15%;
+    --secondary-foreground: 195 35% 92%;
+
+    --muted: 170 60% 15%;
+    --muted-foreground: 175 30% 60%;
+
+    --accent: 175 50% 20%;
+    --accent-foreground: 175 50% 80%;
+
+    --destructive: 0 62% 30%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 170 50% 18%;
+    --input: 170 50% 18%;
+    --ring: 80 100% 72%;
+
+    --sidebar-background: 170 80% 6%;
+    --sidebar-foreground: 175 30% 80%;
+    --sidebar-primary: 80 100% 72%;
+    --sidebar-primary-foreground: 170 80% 12%;
+    --sidebar-accent: 170 60% 12%;
+    --sidebar-accent-foreground: 175 30% 80%;
+    --sidebar-border: 170 50% 18%;
+    --sidebar-ring: 80 100% 72%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Space Grotesk', 'Inter', sans-serif;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-clip-text text-transparent;
+    background-image: var(--gradient-primary);
+  }
+
+  .bg-gradient-primary {
+    background-image: var(--gradient-primary);
+  }
+
+  .bg-gradient-hero {
+    background-image: var(--gradient-hero);
+  }
+
+  .shadow-card {
+    box-shadow: var(--shadow-card);
+  }
+
+  .shadow-card-hover {
+    box-shadow: var(--shadow-card-hover);
+  }
+
+  .shadow-button {
+    box-shadow: var(--shadow-button);
+  }
+
+  /* Liquid Glass Effect */
+  .glass-card {
+    @apply relative overflow-hidden;
+    background: linear-gradient(
+      135deg,
+      hsl(var(--card) / 0.7) 0%,
+      hsl(var(--card) / 0.4) 100%
+    );
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid hsl(var(--border) / 0.5);
+    box-shadow: 
+      0 8px 32px hsl(var(--primary) / 0.1),
+      inset 0 1px 1px hsl(0 0% 100% / 0.3),
+      inset 0 -1px 1px hsl(var(--primary) / 0.05);
+  }
+
+  .glass-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      hsl(0 0% 100% / 0.5) 50%,
+      transparent 100%
+    );
+  }
+
+  .glass-card:hover {
+    background: linear-gradient(
+      135deg,
+      hsl(var(--card) / 0.8) 0%,
+      hsl(var(--card) / 0.5) 100%
+    );
+    box-shadow: 
+      0 16px 48px hsl(var(--primary) / 0.15),
+      inset 0 1px 1px hsl(0 0% 100% / 0.4),
+      inset 0 -1px 1px hsl(var(--primary) / 0.08);
+  }
+
+  .animate-fade-up {
+    animation: fadeUp 0.6s ease-out forwards;
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-out forwards;
+  }
+
+  .animate-scale-in {
+    animation: scaleIn 0.4s ease-out forwards;
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-secondary;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-muted-foreground/30 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-muted-foreground/50;
+}
