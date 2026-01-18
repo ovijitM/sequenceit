@@ -33,7 +33,7 @@ const Header = () => {
         <nav className="flex items-center justify-between h-16 lg:h-20">
           {/* Logo */}
           <div>
-            <img src={logoHead} alt="SequenceIT" className="w-50 h-20 rounded-lg"/>
+            <img src={logoHead} alt="SequenceIT" className="h-20 w-50 rounded-lg"/>
           </div>
           
           {/* <a href="#" className="flex items-center gap-2">
