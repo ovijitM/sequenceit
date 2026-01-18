@@ -14,6 +14,49 @@
   <g transform="translate(20, 20)">
     <!-- Top line with arrow pointing right -->
     <circle cx="10" cy="30" r="6" fill="#1e4d82" />
+    <path d="M10 30 Q 40 5 75 30 L 95 30" fill="none" stroke="url(#grad1)" stroke-width="8" stroke-linecap="round" />
+    <polygon points="90,20 110,30 90,40" fill="#26c0b3" />
+    
+    <!-- Middle connecting line -->
+    <circle cx="35" cy="55" r="6" fill="#1e4d82" />
+    <path d="M35 55 Q 70 75 75 95" fill="none" stroke="url(#grad1)" stroke-width="8" stroke-linecap="round" />
+    <circle cx="75" cy="95" r="6" fill="#26c0b3" />
+    
+    <!-- Bottom line with arrow pointing left -->
+    <circle cx="65" cy="80" r="6" fill="#26c0b3" />
+    <path d="M65 80 Q 35 105 10 80 L 0 80" fill="none" stroke="url(#grad2)" stroke-width="8" stroke-linecap="round" />
+    <polygon points="15,90 -5,80 15,70" fill="#1e4d82" />
+  </g>
+  
+  <!-- Text -->
+  <g transform="translate(140, 30)">
+    <text x="0" y="45" font-family="Arial, sans-serif" font-weight="bold" font-size="40" fill="#1e4d82">Sequence</text>
+    <text x="195" y="45" font-family="Arial, sans-serif" font-weight="bold" font-size="40" fill="#26c0b3">IT</text>
+    <text x="5" y="85" font-family="Arial, sans-serif" font-size="20" fill="#666666">IT Services &amp; Solutions</text>
+  </g>
+</svg>
+
+
+
+//animated
+
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 150">
+  <defs>
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#1e4d82;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#26c0b3;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#26c0b3;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1e4d82;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Circuit S Symbol -->
+  <g transform="translate(20, 20)">
+    <!-- Top line with arrow pointing right -->
+    <circle cx="10" cy="30" r="6" fill="#1e4d82" />
     <path d="M10 30 Q 40 5 75 30 L 95 30" fill="none" stroke="url(#grad1)" stroke-width="8" stroke-linecap="round" stroke-dasharray="100" stroke-dashoffset="100">
       <animate attributeName="stroke-dashoffset" from="100" to="0" dur="1.5s" fill="freeze" />
     </path>

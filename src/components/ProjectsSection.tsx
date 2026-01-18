@@ -11,6 +11,7 @@ interface Project {
   image_url: string | null;
   category: string | null;
   technologies: string[] | null;
+  live_url: string | null;
 }
 
 // Fallback data when database is empty
@@ -24,6 +25,7 @@ const fallbackProjects: Project[] = [
     image_url:
       "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&h=400&fit=crop",
     technologies: ["React", "Node.js", "PostgreSQL"],
+    live_url: null,
   },
   {
     id: "2",
@@ -34,6 +36,7 @@ const fallbackProjects: Project[] = [
     image_url:
       "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=600&h=400&fit=crop",
     technologies: ["Python", "TensorFlow", "NLP"],
+    live_url: null,
   },
   {
     id: "3",
@@ -44,6 +47,7 @@ const fallbackProjects: Project[] = [
     image_url:
       "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=600&h=400&fit=crop",
     technologies: ["Solidity", "Ethereum", "Web3"],
+    live_url: null,
   },
 ];
 
@@ -147,9 +151,16 @@ const ProjectsSection = () => {
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-foreground/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  <button className="absolute bottom-4 right-4 p-2 rounded-lg bg-background/90 text-foreground opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-primary hover:text-primary-foreground">
-                    <ExternalLink className="w-5 h-5" />
-                  </button>
+                  {project.live_url && (
+                    <a
+                      href={project.live_url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="absolute bottom-4 right-4 p-2 rounded-lg bg-background/90 text-foreground opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-primary hover:text-primary-foreground"
+                    >
+                      <ExternalLink className="w-5 h-5" />
+                    </a>
+                  )}
                 </div>
                 <div className="p-6">
                   <span className="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-medium mb-3">

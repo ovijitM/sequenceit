@@ -37,7 +37,7 @@ const TeamManager = () => {
     bio: "",
     image_url: "",
     linkedin_url: "",
-    twitter_url: "",
+    github_url: "",
     team_category: "Development",
   });
   const [isSaving, setIsSaving] = useState(false);
@@ -75,7 +75,7 @@ const TeamManager = () => {
       bio: "",
       image_url: "",
       linkedin_url: "",
-      twitter_url: "",
+      github_url: "",
       team_category: "Development",
     });
     setEditingMember(null);
@@ -89,7 +89,7 @@ const TeamManager = () => {
       bio: member.bio || "",
       image_url: member.image_url || "",
       linkedin_url: member.linkedin_url || "",
-      twitter_url: member.twitter_url || "",
+      github_url: member.github_url || "",
       team_category: member.team_category || "Development",
     });
     setIsDialogOpen(true);
@@ -106,7 +106,7 @@ const TeamManager = () => {
         bio: formData.bio,
         image_url: formData.image_url,
         linkedin_url: formData.linkedin_url,
-        twitter_url: formData.twitter_url,
+        github_url: formData.github_url,
         team_category: formData.team_category,
       };
 
@@ -275,13 +275,13 @@ const TeamManager = () => {
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="twitter_url">Twitter URL</Label>
+                  <Label htmlFor="github_url">GitHub URL</Label>
                   <Input
-                    id="twitter_url"
+                    id="github_url"
                     type="url"
-                    value={formData.twitter_url}
+                    value={formData.github_url}
                     onChange={(e) =>
-                      setFormData({ ...formData, twitter_url: e.target.value })
+                      setFormData({ ...formData, github_url: e.target.value })
                     }
                   />
                 </div>

@@ -64,7 +64,14 @@ const Header = () => {
           {/* CTA Button */}
           <div className="hidden lg:block">
             <Button variant="default" size="default">
-              Get a Quote
+              {/* Get a Quote */}
+              <a
+                key='contact'
+                href="#contact"
+                className="text-white hover:text-white transition-colors font-medium"
+              >
+                Get a Quote
+              </a>
             </Button>
           </div>
 
