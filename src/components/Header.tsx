@@ -30,7 +30,14 @@ const Header = () => {
       <div className="container mx-auto px-4 lg:px-8">
         <nav className="flex items-center justify-between h-16 lg:h-20">
           {/* Logo */}
-          <a href="#" className="flex items-center gap-2">
+          <div>
+            <img src="../../public/logohead.svg" alt="SequenceIT" className="w-50 h-20 rounded-lg"/>
+          </div>
+          
+          {/* <a href="#" className="flex items-center gap-2">
+
+            
+            
             <div className="w-10 h-10 rounded-lg bg-gradient-primary flex items-center justify-center">
               <span className="text-primary-foreground font-display font-bold text-xl">
                 ​ovi
@@ -39,7 +46,7 @@ const Header = () => {
             <span className="font-display font-bold text-xl text-foreground">
               S​equenceIT
             </span>
-          </a>
+          </a> */}
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center gap-8">
