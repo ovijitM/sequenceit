@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
+import logoHead from "/logohead.svg";
+
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navItems = [
@@ -31,7 +33,7 @@ const Header = () => {
         <nav className="flex items-center justify-between h-16 lg:h-20">
           {/* Logo */}
           <div>
-            <img src="/logohead.svg" alt="SequenceIT" className="w-50 h-20 rounded-lg"/>
+            <img src={logoHead} alt="SequenceIT" className="w-50 h-20 rounded-lg"/>
           </div>
           
           {/* <a href="#" className="flex items-center gap-2">
