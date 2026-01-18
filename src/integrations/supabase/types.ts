@@ -48,6 +48,7 @@ export type Database = {
           description: string | null
           id: string
           image_url: string | null
+          live_url: string | null
           technologies: string[] | null
           title: string
           updated_at: string
@@ -58,6 +59,7 @@ export type Database = {
           description?: string | null
           id?: string
           image_url?: string | null
+          live_url?: string | null
           technologies?: string[] | null
           title: string
           updated_at?: string
@@ -68,6 +70,7 @@ export type Database = {
           description?: string | null
           id?: string
           image_url?: string | null
+          live_url?: string | null
           technologies?: string[] | null
           title?: string
           updated_at?: string
@@ -84,7 +87,7 @@ export type Database = {
           name: string
           role: string
           team_category: string | null
-          twitter_url: string | null
+          github_url: string | null
           updated_at: string
         }
         Insert: {
@@ -96,7 +99,7 @@ export type Database = {
           name: string
           role: string
           team_category?: string | null
-          twitter_url?: string | null
+          github_url?: string | null
           updated_at?: string
         }
         Update: {
@@ -108,7 +111,7 @@ export type Database = {
           name?: string
           role?: string
           team_category?: string | null
-          twitter_url?: string | null
+          github_url?: string | null
           updated_at?: string
         }
         Relationships: []

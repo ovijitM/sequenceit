@@ -40,7 +40,7 @@ CREATE TABLE public.team_members (
     bio TEXT,
     image_url TEXT,
     linkedin_url TEXT,
-    twitter_url TEXT,
+    github_url TEXT,
     team_category TEXT DEFAULT 'Development',
     created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now(),
     updated_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now()

@@ -37,6 +37,7 @@ const ProjectsManager = () => {
     image_url: "",
     category: "Web Development",
     technologies: "",
+    live_url: "",
   });
   const [isSaving, setIsSaving] = useState(false);
   const { toast } = useToast();
@@ -73,6 +74,7 @@ const ProjectsManager = () => {
       image_url: "",
       category: "Web Development",
       technologies: "",
+      live_url: "",
     });
     setEditingProject(null);
   };
@@ -85,6 +87,7 @@ const ProjectsManager = () => {
       image_url: project.image_url || "",
       category: project.category || "Web Development",
       technologies: project.technologies?.join(", ") || "",
+      live_url: project.live_url || "",
     });
     setIsDialogOpen(true);
   };
@@ -100,6 +103,7 @@ const ProjectsManager = () => {
         image_url: formData.image_url,
         category: formData.category,
         technologies: formData.technologies.split(",").map((t) => t.trim()).filter(Boolean),
+        live_url: formData.live_url,
       };
 
       if (editingProject) {
@@ -247,6 +251,19 @@ const ProjectsManager = () => {
                     setFormData({ ...formData, technologies: e.target.value })
                   }
                   placeholder="React, Node.js, PostgreSQL"
+                />
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="live_url">Live URL</Label>
+                <Input
+                  id="live_url"
+                  type="url"
+                  value={formData.live_url}
+                  onChange={(e) =>
+                    setFormData({ ...formData, live_url: e.target.value })
+                  }
+                  placeholder="https://..."
                 />
               </div>
 

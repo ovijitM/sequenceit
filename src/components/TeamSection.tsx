@@ -9,7 +9,7 @@ interface TeamMember {
   bio: string | null;
   image_url: string | null;
   linkedin_url: string | null;
-  twitter_url: string | null;
+  github_url: string | null;
   team_category: string | null;
 }
 
@@ -26,7 +26,7 @@ const fallbackTeams = [
           "https://czrzkrlkqywcczazeopo.supabase.co/storage/v1/object/public/blog-images/612681509_1591945398511504_1223457993254445767_n.jpg",
         bio: null,
         linkedin_url: null,
-        twitter_url: null,
+        github_url: null,
         team_category: "Development",
       },
       {
@@ -37,7 +37,7 @@ const fallbackTeams = [
           "https://czrzkrlkqywcczazeopo.supabase.co/storage/v1/object/public/blog-images/Screenshot%202026-01-16%20at%207.16.35%20PM.png",
         bio: null,
         linkedin_url: null,
-        twitter_url: null,
+        github_url: null,
         team_category: "Development",
       },
       {
@@ -48,7 +48,7 @@ const fallbackTeams = [
           "https://czrzkrlkqywcczazeopo.supabase.co/storage/v1/object/public/blog-images/Screenshot%202026-01-16%20at%207.27.59%20PM.png",
         bio: null,
         linkedin_url: null,
-        twitter_url: null,
+        github_url: null,
         team_category: "Development",
       },
     ],
@@ -160,9 +160,9 @@ const TeamSection = () => {
                               <Linkedin className="w-3.5 h-3.5" />
                             </span>
                           )}
-                          {member.twitter_url ? (
+                          {member.github_url ? (
                             <a
-                              href={member.twitter_url}
+                              href={member.github_url}
                               target="_blank"
                               rel="noopener noreferrer"
                               className="p-1.5 rounded-full bg-background border border-border hover:bg-primary hover:border-primary hover:text-primary-foreground transition-all"

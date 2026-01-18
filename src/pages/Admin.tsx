@@ -72,10 +72,7 @@ const Admin = () => {
       <aside className="w-64 bg-card border-r border-border p-4 flex flex-col">
         <div className="mb-8">
           <Link to="/" className="flex items-center gap-2 text-primary font-display font-bold text-xl">
-            <span className="w-8 h-8 rounded-lg bg-primary text-primary-foreground flex items-center justify-center text-sm font-bold">
-              N
-            </span>
-            NexaTech
+            SequenceIT
           </Link>
         </div>
 
