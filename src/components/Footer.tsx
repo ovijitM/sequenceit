@@ -35,7 +35,7 @@ const Footer = () => {
         <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-12 mb-12">
           {/* Brand */}
           <div className="lg:col-span-2">
-            <img src="../../public/logofoot.svg" alt="SequenceIT" className="w-50 h-20 rounded-lg mb-4"/>
+            <img src="/logofoot.svg" alt="SequenceIT" className="w-50 h-15 rounded-lg mb-4"/>
             {/* <a href="#" className="flex items-center gap-2 mb-4">
               <div className="w-10 h-10 rounded-lg bg-gradient-primary flex items-center justify-center">
                 <span className="text-primary-foreground font-display font-bold text-xl">
