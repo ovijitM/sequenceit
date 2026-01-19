@@ -31,7 +31,7 @@
   <!-- Text -->
   <g transform="translate(140, 30)">
     <text x="0" y="45" font-family="Arial, sans-serif" font-weight="bold" font-size="40" fill="#26c0b3">Sequence</text>
-    <text x="195" y="45" font-family="Arial, sans-serif" font-weight="bold" font-size="40" fill="#e1e1e1ff">IT</text>
-    <text x="5" y="85" font-family="Arial, sans-serif" font-size="20" fill="#e3e3e3ff">IT Services &amp; Solutions</text>
+    <text x="195" y="45" font-family="Arial, sans-serif" font-weight="bold" font-size="40" fill="#e4e4e4ff">IT</text>
+    <text x="5" y="85" font-family="Arial, sans-serif" font-size="20" fill="#e4e4e4ff">IT Services &amp; Solutions</text>
   </g>
 </svg>
