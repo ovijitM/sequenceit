@@ -8,23 +8,23 @@ const Header = () => {
   const navItems = [
     {
       label: "About",
-      href: "#about",
+      href: "/#about",
     },
     {
       label: "Services",
-      href: "#services",
+      href: "/#services",
     },
     {
       label: "Projects",
-      href: "#projects",
+      href: "/#projects",
     },
     {
       label: "Team",
-      href: "#team",
+      href: "/#team",
     },
     {
       label: "Contact",
-      href: "#contact",
+      href: "/#contact",
     },
   ];
   return (
@@ -33,7 +33,9 @@ const Header = () => {
         <nav className="flex items-center justify-between h-16 lg:h-20">
           {/* Logo */}
           <div>
+            <a href="/">
             <img src={logoHead} alt="SequenceIT" className="h-20 w-50 rounded-lg"/>
+            </a>
           </div>
           
           {/* <a href="#" className="flex items-center gap-2">
@@ -72,7 +74,7 @@ const Header = () => {
                 href="#contact"
                 className="text-white hover:text-white transition-colors font-medium"
               >
-                Get a Quote
+                Book Your Appointment Now!
               </a>
             </Button>
           </div>
@@ -111,7 +113,7 @@ const Header = () => {
                   href="#contact"
                   className="text-white hover:text-white transition-colors font-medium"
                 >
-                  Get a Quote
+                  Contact Us
                 </a>
               </Button>
             </div>
