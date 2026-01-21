@@ -1,5 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Code2, Brain, Blocks } from "lucide-react";
+import Lottie from "lottie-react";
+import itDealAnimation from "../../IT Deal.json";
 
 const HeroSection = () => {
   return (
@@ -17,7 +19,7 @@ const HeroSection = () => {
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent border border-primary/20 animate-fade-up">
               <span className="w-2 h-2 rounded-full bg-primary animate-pulse-glow" />
               <span className="text-sm font-medium text-accent-foreground">
-                Trusted by 500+ Companies Worldwide
+                Trusted by 15+ Companies Worldwide
               </span>
             </div>
 
@@ -49,7 +51,7 @@ const HeroSection = () => {
                 </Button>
               </a>
               <a href="#projects">
-              <Button variant="hero-outline">View Our Work</Button>
+                <Button variant="hero-outline">View Our Work</Button>
               </a>
             </div>
 
@@ -60,7 +62,7 @@ const HeroSection = () => {
             >
               <div>
                 <p className="text-3xl font-display font-bold text-foreground">
-                  500+
+                  30+
                 </p>
                 <p className="text-sm text-muted-foreground">
                   Projects Delivered
@@ -68,7 +70,7 @@ const HeroSection = () => {
               </div>
               <div>
                 <p className="text-3xl font-display font-bold text-foreground">
-                  98%
+                  97%
                 </p>
                 <p className="text-sm text-muted-foreground">
                   Client Satisfaction
@@ -76,7 +78,7 @@ const HeroSection = () => {
               </div>
               <div>
                 <p className="text-3xl font-display font-bold text-foreground">
-                  50+
+                  7+
                 </p>
                 <p className="text-sm text-muted-foreground">
                   Expert Developers
@@ -88,75 +90,13 @@ const HeroSection = () => {
           {/* Visual */}
           <div className="relative hidden lg:block">
             <div className="relative">
-              {/* Floating Cards */}
-              <div className="absolute -top-4 left-8 p-4 bg-card rounded-xl shadow-card animate-float border border-border">
-                <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
-                    <Code2 className="w-6 h-6 text-primary" />
-                  </div>
-                  <div>
-                    <p className="font-semibold text-foreground">
-                      Web Development
-                    </p>
-                    <p className="text-sm text-muted-foreground">
-                      120+ Projects
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div
-                className="absolute top-32 -right-4 p-4 bg-card rounded-xl shadow-card animate-float border border-border"
-                style={{ animationDelay: "0.5s" }}
-              >
-                <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
-                    <Brain className="w-6 h-6 text-primary" />
-                  </div>
-                  <div>
-                    <p className="font-semibold text-foreground">
-                      AI Solutions
-                    </p>
-                    <p className="text-sm text-muted-foreground">
-                      85+ Projects
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div
-                className="absolute bottom-16 left-4 p-4 bg-card rounded-xl shadow-card animate-float border border-border"
-                style={{ animationDelay: "1s" }}
-              >
-                <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
-                    <Blocks className="w-6 h-6 text-primary" />
-                  </div>
-                  <div>
-                    <p className="font-semibold text-foreground">Blockchain</p>
-                    <p className="text-sm text-muted-foreground">
-                      60+ Projects
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Main Visual Element */}
-              <div className="w-full aspect-square max-w-lg mx-auto relative">
-                <div className="absolute inset-0 bg-gradient-primary rounded-3xl opacity-20 blur-2xl" />
-                <div className="relative w-full h-full rounded-3xl bg-gradient-to-br from-secondary to-background border border-border overflow-hidden">
-                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,hsl(var(--primary)/0.1),transparent_70%)]" />
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="w-32 h-32 rounded-full bg-gradient-primary opacity-80 blur-xl animate-pulse-glow" />
-                  </div>
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="w-20 h-20 rounded-2xl bg-gradient-primary flex items-center justify-center shadow-button">
-                      <span className="text-primary-foreground font-display font-bold text-3xl">
-                        N
-                      </span>
-                    </div>
-                  </div>
-                </div>
+              {/* Lottie Animation */}
+              <div className="w-full max-w-lg mx-auto">
+                <Lottie
+                  animationData={itDealAnimation}
+                  loop={true}
+                  className="w-full h-auto"
+                />
               </div>
             </div>
           </div>
