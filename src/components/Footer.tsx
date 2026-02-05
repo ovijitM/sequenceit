@@ -6,8 +6,8 @@ const Footer = () => {
     company: [
       { label: "About Us", href: "#about" },
       { label: "Our Team", href: "#team" },
-      { label: "Careers", href: "#" },
-      { label: "Blog", href: "#" },
+      { label: "Careers", href: "/careers" },
+      { label: "Blog", href: "/blog" },
     ],
     services: [
       { label: "Web Development", href: "#services" },
@@ -16,10 +16,10 @@ const Footer = () => {
       { label: "Cloud Solutions", href: "#services" },
     ],
     resources: [
-      { label: "Documentation", href: "#" },
-      { label: "Case Studies", href: "#projects" },
-      { label: "Support", href: "#contact" },
-      { label: "FAQs", href: "#" },
+      { label: "Documentation", href: "/documentation" },
+      { label: "Case Studies", href: "/case-studies" },
+      { label: "Support", href: "/support" },
+      { label: "FAQs", href: "/faqs" },
     ],
   };
 
@@ -122,19 +122,19 @@ const Footer = () => {
           </p>
           <div className="flex gap-6">
             <a
-              href="#"
+              href="/privacy-policy"
               className="text-background/60 hover:text-background text-sm transition-colors"
             >
               Privacy Policy
             </a>
             <a
-              href="#"
+              href="/terms-of-service"
               className="text-background/60 hover:text-background text-sm transition-colors"
             >
               Terms of Service
             </a>
             <a
-              href="#"
+              href="/cookie-policy"
               className="text-background/60 hover:text-background text-sm transition-colors"
             >
               Cookie Policy
