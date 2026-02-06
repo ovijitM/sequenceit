@@ -1,5 +1,6 @@
 import { Linkedin, Twitter, Github, Instagram } from "lucide-react";
 import logoFoot from "/logofoot.svg";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   const footerLinks = {
@@ -71,12 +72,21 @@ const Footer = () => {
             <ul className="space-y-3">
               {footerLinks.company.map((link) => (
                 <li key={link.label}>
-                  <a
-                    href={link.href}
-                    className="text-background/70 hover:text-primary transition-colors"
-                  >
-                    {link.label}
-                  </a>
+                  {link.href.startsWith("/") ? (
+                    <Link
+                      to={link.href}
+                      className="text-background/70 hover:text-primary transition-colors"
+                    >
+                      {link.label}
+                    </Link>
+                  ) : (
+                    <a
+                      href={link.href}
+                      className="text-background/70 hover:text-primary transition-colors"
+                    >
+                      {link.label}
+                    </a>
+                  )}
                 </li>
               ))}
             </ul>
@@ -87,12 +97,21 @@ const Footer = () => {
             <ul className="space-y-3">
               {footerLinks.services.map((link) => (
                 <li key={link.label}>
-                  <a
-                    href={link.href}
-                    className="text-background/70 hover:text-primary transition-colors"
-                  >
-                    {link.label}
-                  </a>
+                  {link.href.startsWith("/") ? (
+                    <Link
+                      to={link.href}
+                      className="text-background/70 hover:text-primary transition-colors"
+                    >
+                      {link.label}
+                    </Link>
+                  ) : (
+                    <a
+                      href={link.href}
+                      className="text-background/70 hover:text-primary transition-colors"
+                    >
+                      {link.label}
+                    </a>
+                  )}
                 </li>
               ))}
             </ul>
@@ -103,12 +122,21 @@ const Footer = () => {
             <ul className="space-y-3">
               {footerLinks.resources.map((link) => (
                 <li key={link.label}>
-                  <a
-                    href={link.href}
-                    className="text-background/70 hover:text-primary transition-colors"
-                  >
-                    {link.label}
-                  </a>
+                  {link.href.startsWith("/") ? (
+                    <Link
+                      to={link.href}
+                      className="text-background/70 hover:text-primary transition-colors"
+                    >
+                      {link.label}
+                    </Link>
+                  ) : (
+                    <a
+                      href={link.href}
+                      className="text-background/70 hover:text-primary transition-colors"
+                    >
+                      {link.label}
+                    </a>
+                  )}
                 </li>
               ))}
             </ul>
@@ -121,24 +149,24 @@ const Footer = () => {
             © {new Date().getFullYear()} S​equenceIT. All rights reserved.
           </p>
           <div className="flex gap-6">
-            <a
-              href="/privacy-policy"
+            <Link
+              to="/privacy-policy"
               className="text-background/60 hover:text-background text-sm transition-colors"
             >
               Privacy Policy
-            </a>
-            <a
-              href="/terms-of-service"
+            </Link>
+            <Link
+              to="/terms-of-service"
               className="text-background/60 hover:text-background text-sm transition-colors"
             >
               Terms of Service
-            </a>
-            <a
-              href="/cookie-policy"
+            </Link>
+            <Link
+              to="/cookie-policy"
               className="text-background/60 hover:text-background text-sm transition-colors"
             >
               Cookie Policy
-            </a>
+            </Link>
           </div>
         </div>
       </div>
