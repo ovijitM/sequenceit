@@ -19,6 +19,7 @@ import DocumentationManager from "./pages/admin/DocumentationManager";
 import FAQsManager from "./pages/admin/FAQsManager";
 import AllProjects from "./pages/AllProjects";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
+import CompanyPolicy from "./pages/CompanyPolicy";
 import TermsOfService from "./pages/TermsOfService";
 import CookiePolicy from "./pages/CookiePolicy";
 import Careers from "./pages/Careers";
@@ -47,6 +48,7 @@ const App = () => (
             <Route path="/support" element={<Support />} />
             <Route path="/faqs" element={<FAQs />} />
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+            <Route path="/company-policy" element={<CompanyPolicy />} />
             <Route path="/terms-of-service" element={<TermsOfService />} />
             <Route path="/cookie-policy" element={<CookiePolicy />} />
             <Route path="/admin/login" element={<AdminLogin />} />

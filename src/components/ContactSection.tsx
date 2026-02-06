@@ -134,7 +134,7 @@ const ContactSection = () => {
     {
       icon: Mail,
       title: "Email",
-      content: "sequenceitbd@gmail.com",
+      content: "query.sequenceit@gmail.com",
     },
   ];
 

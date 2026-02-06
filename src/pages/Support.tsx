@@ -32,7 +32,7 @@ const Support = () => {
       description: "Send us a detailed message",
       availability: "Response within 24 hours",
       action: "Send Email",
-      href: "mailto:support@sequenceit.com"
+      href: "mailto:query.sequenceit@gmail.com"
     },
     {
       icon: Phone,
@@ -40,7 +40,7 @@ const Support = () => {
       description: "Speak directly with our team",
       availability: "Mon-Fri, 9AM-6PM EST",
       action: "Call Now",
-      href: "tel:+15551234567"
+      href: "tel:+8801540515959"
     },
     {
       icon: Users,

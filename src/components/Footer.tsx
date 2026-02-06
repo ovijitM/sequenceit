@@ -37,7 +37,11 @@ const Footer = () => {
         <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-12 mb-12">
           {/* Brand */}
           <div className="lg:col-span-2">
-            <img src={logoFoot} alt="SequenceIT" className="h-20 w-50 object-contain mb-4"/>
+            <img
+              src={logoFoot}
+              alt="SequenceIT"
+              className="h-20 w-50 object-contain mb-4"
+            />
             {/* <a href="#" className="flex items-center gap-2 mb-4">
               <div className="w-10 h-10 rounded-lg bg-gradient-primary flex items-center justify-center">
                 <span className="text-primary-foreground font-display font-bold text-xl">
@@ -75,14 +79,14 @@ const Footer = () => {
                   {link.href.startsWith("/") ? (
                     <Link
                       to={link.href}
-                      className="text-background/70 hover:text-primary transition-colors"
+                      className="text-background/70 hover:text-background transition-colors"
                     >
                       {link.label}
                     </Link>
                   ) : (
                     <a
                       href={link.href}
-                      className="text-background/70 hover:text-primary transition-colors"
+                      className="text-background/70 hover:text-background transition-colors"
                     >
                       {link.label}
                     </a>
@@ -100,14 +104,14 @@ const Footer = () => {
                   {link.href.startsWith("/") ? (
                     <Link
                       to={link.href}
-                      className="text-background/70 hover:text-primary transition-colors"
+                      className="text-background/70 hover:text-background transition-colors"
                     >
                       {link.label}
                     </Link>
                   ) : (
                     <a
                       href={link.href}
-                      className="text-background/70 hover:text-primary transition-colors"
+                      className="text-background/70 hover:text-background transition-colors"
                     >
                       {link.label}
                     </a>
@@ -125,14 +129,14 @@ const Footer = () => {
                   {link.href.startsWith("/") ? (
                     <Link
                       to={link.href}
-                      className="text-background/70 hover:text-primary transition-colors"
+                      className="text-background/70 hover:text-background transition-colors"
                     >
                       {link.label}
                     </Link>
                   ) : (
                     <a
                       href={link.href}
-                      className="text-background/70 hover:text-primary transition-colors"
+                      className="text-background/70 hover:text-background transition-colors"
                     >
                       {link.label}
                     </a>
@@ -149,6 +153,12 @@ const Footer = () => {
             © {new Date().getFullYear()} S​equenceIT. All rights reserved.
           </p>
           <div className="flex gap-6">
+            <Link
+              to="/company-policy"
+              className="text-background/60 hover:text-background text-sm transition-colors"
+            >
+              Company Policy
+            </Link>
             <Link
               to="/privacy-policy"
               className="text-background/60 hover:text-background text-sm transition-colors"

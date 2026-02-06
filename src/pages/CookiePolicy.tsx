@@ -164,8 +164,8 @@ const CookiePolicy = () => {
                 If you have any questions about our use of cookies, please contact us:
               </p>
               <ul className="list-none text-muted-foreground space-y-2">
-                <li>Email: privacy@sequenceit.com</li>
-                <li>Phone: +1 (555) 123-4567</li>
+                <li>Email: query.sequenceit@gmail.com</li>
+                <li>Phone: +8801540515959</li>
               </ul>
             </section>
           </div>

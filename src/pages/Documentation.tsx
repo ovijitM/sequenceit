@@ -197,8 +197,10 @@ const Documentation = () => {
             <p className="text-muted-foreground text-lg mb-8 max-w-2xl mx-auto">
               Our support team is here to help. Get in touch with us for personalized assistance.
             </p>
-            <Button size="lg" className="group">
+            <Button size="lg" className="group" href="/support">
+            <a href="/support">
               Contact Support
+              </a>
               <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </Button>
           </div>

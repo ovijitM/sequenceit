@@ -71,7 +71,7 @@ const Header = () => {
               {/* Get a Quote */}
               <a
                 key='contact'
-                href="#contact"
+                href="/#contact"
                 className="text-white hover:text-white transition-colors font-medium"
               >
                 Book Your Appointment Now!
