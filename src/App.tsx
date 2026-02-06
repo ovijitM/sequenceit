@@ -28,6 +28,7 @@ import Documentation from "./pages/Documentation";
 import CaseStudies from "./pages/CaseStudies";
 import Support from "./pages/Support";
 import FAQs from "./pages/FAQs";
+import Feedback from "./pages/Feedback";
 
 const queryClient = new QueryClient();
 
@@ -51,6 +52,7 @@ const App = () => (
             <Route path="/company-policy" element={<CompanyPolicy />} />
             <Route path="/terms-of-service" element={<TermsOfService />} />
             <Route path="/cookie-policy" element={<CookiePolicy />} />
+            <Route path="/feedback" element={<Feedback />} />
             <Route path="/admin/login" element={<AdminLogin />} />
             <Route path="/admin" element={<Admin />}>
               <Route index element={<Dashboard />} />
