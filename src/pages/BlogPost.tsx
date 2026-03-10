@@ -161,11 +161,54 @@ const BlogPost = () => {
 
             {/* Content */}
             <div className="prose prose-sm md:prose-base dark:prose-invert max-w-none mb-12">
-              {post.content.split("\n\n").map((paragraph, index) => (
-                <p key={index} className="mb-6 leading-relaxed">
-                  {paragraph}
-                </p>
-              ))}
+              {post.content
+                .split(/\\n\\n|(\n\n)/)
+                .filter(Boolean)
+                .map((section, index) => {
+                  // Check if this section is a heading or list
+                  if (section.startsWith("###")) {
+                    return (
+                      <h3 key={index} className="text-xl font-bold mt-8 mb-4">
+                        {section.replace(/^###\s*/, "")}
+                      </h3>
+                    );
+                  } else if (section.startsWith("##")) {
+                    return (
+                      <h2 key={index} className="text-2xl font-bold mt-10 mb-6">
+                        {section.replace(/^##\s*/, "")}
+                      </h2>
+                    );
+                  } else if (section.startsWith("- **")) {
+                    // List item with bold
+                    return (
+                      <div key={index} className="ml-4 mb-3">
+                        {section.split("\n").map((line, i) => (
+                          <p key={i} className="mb-2 leading-relaxed">
+                            {line.replace(/^- \*\*/, "• **")}
+                          </p>
+                        ))}
+                      </div>
+                    );
+                  } else if (section.startsWith("- ")) {
+                    // Regular list
+                    return (
+                      <div key={index} className="ml-4 mb-3">
+                        {section.split("\n").map((line, i) => (
+                          <p key={i} className="mb-2 leading-relaxed">
+                            {line.replace(/^- /, "• ")}
+                          </p>
+                        ))}
+                      </div>
+                    );
+                  } else {
+                    // Regular paragraph
+                    return (
+                      <p key={index} className="mb-6 leading-relaxed text-justify">
+                        {section.replace(/\\n/g, " ")}
+                      </p>
+                    );
+                  }
+                })}
             </div>
 
             {/* Back to Blog Button */}
