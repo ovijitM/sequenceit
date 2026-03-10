@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useNavigate, Outlet, Link, useLocation } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
 import { Button } from "@/components/ui/button";
+import AdminAIChat from "@/components/AdminAIChat";
 import {
   LayoutDashboard,
   FolderKanban,
@@ -118,6 +119,9 @@ const Admin = () => {
       <main className="flex-1 p-8 overflow-auto">
         <Outlet />
       </main>
+
+      {/* AI Assistant Chat Popup */}
+      <AdminAIChat />
     </div>
   );
 };
