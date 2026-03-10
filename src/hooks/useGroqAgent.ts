@@ -686,14 +686,39 @@ export function useGroqAgent() {
         let allNewMessages: any[] = [];
 
         for (let iteration = 0; iteration < 10; iteration++) {
-          const model = (import.meta.env.VITE_GROQ_MODEL as string) || "llama-3.3-70b-versatile";
-          const response = await client.chat.completions.create({
-            model,
-            messages: loopMessages,
-            tools: TOOL_DEFINITIONS,
-            tool_choice: "auto",
-            max_tokens: 2048,
-          });
+          // Primary model + 5 free-tier fallbacks (Groq API compatible)
+          const MODELS = [
+            (import.meta.env.VITE_GROQ_MODEL as string) || "llama-3.3-70b-versatile", // Primary
+            "llama-3.1-8b-instant", // Fallback 1: Fast & lightweight
+            "meta-llama/llama-guard-4-12b", // Fallback 2: Safety-focused
+            "openai/gpt-oss-120b", // Fallback 3: High quality
+            "qwen/qwen3-32b", // Fallback 4: Balanced performance
+            "meta-llama/llama-4-scout-17b-16e-instruct", // Fallback 5: Scout model
+          ];
+          
+          let response;
+          let lastError: Error | null = null;
+
+          for (const model of MODELS) {
+            try {
+              response = await client.chat.completions.create({
+                model,
+                messages: loopMessages,
+                tools: TOOL_DEFINITIONS,
+                tool_choice: "auto",
+                max_tokens: 2048,
+              });
+              break; // Success, exit fallback loop
+            } catch (err) {
+              lastError = err as Error;
+              console.warn(`Model ${model} failed, trying next fallback...`);
+              continue; // Try next model
+            }
+          }
+
+          if (!response) {
+            throw lastError || new Error("All models failed to respond");
+          }
 
           const choice = response.choices[0];
           const assistantMsg = choice.message;
