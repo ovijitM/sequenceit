@@ -12,6 +12,34 @@
 
 import { supabase } from "@/integrations/supabase/client";
 
+// ─────────────────────────────────────────────
+// HELPERS
+// ─────────────────────────────────────────────
+
+/**
+ * Validate and sanitize image_url. Only accepts HTTP(S) URLs, rejects data URIs.
+ */
+function validateImageUrl(url?: string): string | undefined {
+  if (!url) return undefined;
+  if (url.startsWith("data:")) {
+    throw new Error("Image URL must be a valid HTTP/HTTPS URL, not embedded data. Please provide a public image URL.");
+  }
+  if (!url.startsWith("http://") && !url.startsWith("https://")) {
+    throw new Error("Image URL must start with http:// or https://");
+  }
+  return url;
+}
+
+/**
+ * Coerce string booleans to actual booleans (LLMs often return "true"/"false" as strings).
+ */
+function toBoolean(value: boolean | string | undefined): boolean | undefined {
+  if (value === undefined) return undefined;
+  if (typeof value === "boolean") return value;
+  if (typeof value === "string") return value.toLowerCase() === "true";
+  return undefined;
+}
+
 // The generated types.ts only covers the base 5 tables.
 // The extra tables (blog_posts, careers, case_studies, documentation, faqs)
 // exist in the DB but are not yet reflected in types.ts.
@@ -41,6 +69,7 @@ export async function createProject(args: {
   technologies?: string[];
   live_url?: string;
 }) {
+  args.image_url = validateImageUrl(args.image_url);
   const { data, error } = await supabase.from("projects").insert(args).select().single();
   if (error) throw new Error(error.message);
   return data;
@@ -55,6 +84,7 @@ export async function updateProject(args: {
   technologies?: string[];
   live_url?: string;
 }) {
+  args.image_url = validateImageUrl(args.image_url);
   const { id, ...fields } = args;
   const { data, error } = await supabase.from("projects").update(fields).eq("id", id).select().single();
   if (error) throw new Error(error.message);
@@ -89,6 +119,7 @@ export async function createTeamMember(args: {
   github_url?: string;
   team_category?: string;
 }) {
+  args.image_url = validateImageUrl(args.image_url);
   const { data, error } = await supabase.from("team_members").insert(args).select().single();
   if (error) throw new Error(error.message);
   return data;
@@ -104,6 +135,7 @@ export async function updateTeamMember(args: {
   github_url?: string;
   team_category?: string;
 }) {
+  args.image_url = validateImageUrl(args.image_url);
   const { id, ...fields } = args;
   const { data, error } = await supabase.from("team_members").update(fields).eq("id", id).select().single();
   if (error) throw new Error(error.message);
@@ -137,6 +169,7 @@ export async function createTestimonial(args: {
   image_url?: string;
   rating?: number;
 }) {
+  args.image_url = validateImageUrl(args.image_url);
   const { data, error } = await supabase.from("testimonials").insert(args).select().single();
   if (error) throw new Error(error.message);
   return data;
@@ -151,6 +184,7 @@ export async function updateTestimonial(args: {
   image_url?: string;
   rating?: number;
 }) {
+  args.image_url = validateImageUrl(args.image_url);
   const { id, ...fields } = args;
   const { data, error } = await supabase.from("testimonials").update(fields).eq("id", id).select().single();
   if (error) throw new Error(error.message);
@@ -184,9 +218,12 @@ export async function createBlogPost(args: {
   category: string;
   image_url?: string;
   read_time?: string;
-  is_featured?: boolean;
-  published?: boolean;
+  is_featured?: boolean | string;
+  published?: boolean | string;
 }) {
+  args.image_url = validateImageUrl(args.image_url);
+  args.is_featured = toBoolean(args.is_featured);
+  args.published = toBoolean(args.published);
   const { data, error } = await db.from("blog_posts").insert(args).select().single();
   if (error) throw new Error(error.message);
   return data;
@@ -201,9 +238,12 @@ export async function updateBlogPost(args: {
   category?: string;
   image_url?: string;
   read_time?: string;
-  is_featured?: boolean;
-  published?: boolean;
+  is_featured?: boolean | string;
+  published?: boolean | string;
 }) {
+  args.image_url = validateImageUrl(args.image_url);
+  args.is_featured = toBoolean(args.is_featured);
+  args.published = toBoolean(args.published);
   const { id, ...fields } = args;
   const { data, error } = await db.from("blog_posts").update(fields).eq("id", id).select().single();
   if (error) throw new Error(error.message);
@@ -236,8 +276,9 @@ export async function createCareer(args: {
   type: string;
   description: string;
   requirements?: string[];
-  published?: boolean;
+  published?: boolean | string;
 }) {
+  args.published = toBoolean(args.published);
   const { data, error } = await db.from("careers").insert(args).select().single();
   if (error) throw new Error(error.message);
   return data;
@@ -251,8 +292,9 @@ export async function updateCareer(args: {
   type?: string;
   description?: string;
   requirements?: string[];
-  published?: boolean;
+  published?: boolean | string;
 }) {
+  args.published = toBoolean(args.published);
   const { id, ...fields } = args;
   const { data, error } = await db.from("careers").update(fields).eq("id", id).select().single();
   if (error) throw new Error(error.message);
@@ -288,8 +330,10 @@ export async function createCaseStudy(args: {
   testimonial?: string;
   tags?: string[];
   results?: { metric: string; value: string; icon: string }[];
-  published?: boolean;
+  published?: boolean | string;
 }) {
+  args.image_url = validateImageUrl(args.image_url);
+  args.published = toBoolean(args.published);
   const { data, error } = await db.from("case_studies").insert(args).select().single();
   if (error) throw new Error(error.message);
   return data;
@@ -306,8 +350,10 @@ export async function updateCaseStudy(args: {
   testimonial?: string;
   tags?: string[];
   results?: { metric: string; value: string; icon: string }[];
-  published?: boolean;
+  published?: boolean | string;
 }) {
+  args.image_url = validateImageUrl(args.image_url);
+  args.published = toBoolean(args.published);
   const { id, ...fields } = args;
   const { data, error } = await db.from("case_studies").update(fields).eq("id", id).select().single();
   if (error) throw new Error(error.message);
@@ -340,8 +386,9 @@ export async function createDocumentation(args: {
   content: string;
   icon?: string;
   order_index?: number;
-  published?: boolean;
+  published?: boolean | string;
 }) {
+  args.published = toBoolean(args.published);
   const { data, error } = await db.from("documentation").insert(args).select().single();
   if (error) throw new Error(error.message);
   return data;
@@ -354,8 +401,9 @@ export async function updateDocumentation(args: {
   content?: string;
   icon?: string;
   order_index?: number;
-  published?: boolean;
+  published?: boolean | string;
 }) {
+  args.published = toBoolean(args.published);
   const { id, ...fields } = args;
   const { data, error } = await db.from("documentation").update(fields).eq("id", id).select().single();
   if (error) throw new Error(error.message);
@@ -387,8 +435,9 @@ export async function createFaq(args: {
   answer: string;
   category: string;
   order_index?: number;
-  published?: boolean;
+  published?: boolean | string;
 }) {
+  args.published = toBoolean(args.published);
   const { data, error } = await db.from("faqs").insert(args).select().single();
   if (error) throw new Error(error.message);
   return data;
@@ -400,8 +449,9 @@ export async function updateFaq(args: {
   answer?: string;
   category?: string;
   order_index?: number;
-  published?: boolean;
+  published?: boolean | string;
 }) {
+  args.published = toBoolean(args.published);
   const { id, ...fields } = args;
   const { data, error } = await db.from("faqs").update(fields).eq("id", id).select().single();
   if (error) throw new Error(error.message);
