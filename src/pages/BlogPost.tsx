@@ -162,29 +162,74 @@ const BlogPost = () => {
             </p>
 
             {/* Content */}
-            <div className="prose prose-sm md:prose-base dark:prose-invert max-w-none mb-12
-              prose-headings:font-display prose-headings:font-bold
-              prose-h1:text-3xl prose-h2:text-2xl prose-h3:text-xl
-              prose-h2:mt-10 prose-h2:mb-4 prose-h3:mt-8 prose-h3:mb-3
-              prose-p:leading-relaxed prose-p:mb-4
-              prose-strong:font-semibold
-              prose-ul:my-4 prose-ul:list-disc prose-ul:pl-6
-              prose-ol:my-4 prose-ol:list-decimal prose-ol:pl-6
-              prose-li:my-1 prose-li:leading-relaxed
-              prose-blockquote:border-l-4 prose-blockquote:border-primary prose-blockquote:pl-4 prose-blockquote:italic
-              prose-code:bg-muted prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-sm
-              prose-pre:bg-muted prose-pre:p-4 prose-pre:rounded-lg prose-pre:overflow-x-auto
-              prose-hr:my-8">
+            <div className="prose prose-base dark:prose-invert max-w-none mb-12">
               <ReactMarkdown
                 remarkPlugins={[remarkGfm]}
                 components={{
-                  // Normalize escaped \n sequences stored in DB
+                  h1: ({ children }) => (
+                    <h1 className="font-display text-4xl font-bold mt-10 mb-6 leading-tight">{children}</h1>
+                  ),
+                  h2: ({ children }) => (
+                    <h2 className="font-display text-3xl font-bold mt-10 mb-5 leading-tight">{children}</h2>
+                  ),
+                  h3: ({ children }) => (
+                    <h3 className="font-display text-2xl font-semibold mt-8 mb-4 leading-snug">{children}</h3>
+                  ),
+                  h4: ({ children }) => (
+                    <h4 className="font-display text-xl font-semibold mt-6 mb-3">{children}</h4>
+                  ),
+                  h5: ({ children }) => (
+                    <h5 className="font-display text-lg font-semibold mt-5 mb-2">{children}</h5>
+                  ),
+                  h6: ({ children }) => (
+                    <h6 className="font-display text-base font-semibold mt-4 mb-2 text-muted-foreground">{children}</h6>
+                  ),
                   p: ({ children }) => (
-                    <p className="mb-4 leading-relaxed">
-                      {typeof children === "string"
-                        ? children.replace(/\\n/g, "\n")
-                        : children}
-                    </p>
+                    <p className="mb-5 leading-relaxed">{children}</p>
+                  ),
+                  strong: ({ children }) => (
+                    <strong className="font-semibold text-foreground">{children}</strong>
+                  ),
+                  em: ({ children }) => (
+                    <em className="italic">{children}</em>
+                  ),
+                  ul: ({ children }) => (
+                    <ul className="list-disc pl-6 my-4 space-y-1">{children}</ul>
+                  ),
+                  ol: ({ children }) => (
+                    <ol className="list-decimal pl-6 my-4 space-y-1">{children}</ol>
+                  ),
+                  li: ({ children }) => (
+                    <li className="leading-relaxed">{children}</li>
+                  ),
+                  blockquote: ({ children }) => (
+                    <blockquote className="border-l-4 border-primary pl-4 my-6 italic text-muted-foreground">{children}</blockquote>
+                  ),
+                  code: ({ children, className }) => {
+                    const isBlock = !!className;
+                    return isBlock ? (
+                      <code className={className}>{children}</code>
+                    ) : (
+                      <code className="bg-muted px-1.5 py-0.5 rounded text-sm font-mono">{children}</code>
+                    );
+                  },
+                  pre: ({ children }) => (
+                    <pre className="bg-muted p-4 rounded-lg overflow-x-auto my-6 text-sm font-mono">{children}</pre>
+                  ),
+                  hr: () => <hr className="my-8 border-border" />,
+                  a: ({ href, children }) => (
+                    <a href={href} target="_blank" rel="noopener noreferrer" className="text-primary underline hover:text-primary/80 transition-colors">{children}</a>
+                  ),
+                  table: ({ children }) => (
+                    <div className="overflow-x-auto my-6">
+                      <table className="w-full border-collapse text-sm">{children}</table>
+                    </div>
+                  ),
+                  th: ({ children }) => (
+                    <th className="border border-border px-4 py-2 bg-muted font-semibold text-left">{children}</th>
+                  ),
+                  td: ({ children }) => (
+                    <td className="border border-border px-4 py-2">{children}</td>
                   ),
                 }}
               >
