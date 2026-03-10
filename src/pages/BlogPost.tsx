@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams, useLocation, useNavigate } from "react-router-dom";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import { supabase } from "@/integrations/supabase/client";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -160,55 +162,34 @@ const BlogPost = () => {
             </p>
 
             {/* Content */}
-            <div className="prose prose-sm md:prose-base dark:prose-invert max-w-none mb-12">
-              {post.content
-                .split(/\\n\\n|(\n\n)/)
-                .filter(Boolean)
-                .map((section, index) => {
-                  // Check if this section is a heading or list
-                  if (section.startsWith("###")) {
-                    return (
-                      <h3 key={index} className="text-xl font-bold mt-8 mb-4">
-                        {section.replace(/^###\s*/, "")}
-                      </h3>
-                    );
-                  } else if (section.startsWith("##")) {
-                    return (
-                      <h2 key={index} className="text-2xl font-bold mt-10 mb-6">
-                        {section.replace(/^##\s*/, "")}
-                      </h2>
-                    );
-                  } else if (section.startsWith("- **")) {
-                    // List item with bold
-                    return (
-                      <div key={index} className="ml-4 mb-3">
-                        {section.split("\n").map((line, i) => (
-                          <p key={i} className="mb-2 leading-relaxed">
-                            {line.replace(/^- \*\*/, "• **")}
-                          </p>
-                        ))}
-                      </div>
-                    );
-                  } else if (section.startsWith("- ")) {
-                    // Regular list
-                    return (
-                      <div key={index} className="ml-4 mb-3">
-                        {section.split("\n").map((line, i) => (
-                          <p key={i} className="mb-2 leading-relaxed">
-                            {line.replace(/^- /, "• ")}
-                          </p>
-                        ))}
-                      </div>
-                    );
-                  } else {
-                    // Regular paragraph
-                    return (
-                      <p key={index} className="mb-6 leading-relaxed text-justify">
-                        {section.replace(/\\n/g, " ")}
-                      </p>
-                    );
-                  }
-                })}
+            <div className="prose prose-sm md:prose-base dark:prose-invert max-w-none mb-12
+              prose-headings:font-display prose-headings:font-bold
+              prose-h1:text-3xl prose-h2:text-2xl prose-h3:text-xl
+              prose-h2:mt-10 prose-h2:mb-4 prose-h3:mt-8 prose-h3:mb-3
+              prose-p:leading-relaxed prose-p:mb-4
+              prose-strong:font-semibold
+              prose-ul:my-4 prose-ul:list-disc prose-ul:pl-6
+              prose-ol:my-4 prose-ol:list-decimal prose-ol:pl-6
+              prose-li:my-1 prose-li:leading-relaxed
+              prose-blockquote:border-l-4 prose-blockquote:border-primary prose-blockquote:pl-4 prose-blockquote:italic
+              prose-code:bg-muted prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-sm
+              prose-pre:bg-muted prose-pre:p-4 prose-pre:rounded-lg prose-pre:overflow-x-auto
+              prose-hr:my-8">
+              <ReactMarkdown
+                remarkPlugins={[remarkGfm]}
+                components={{
+                  // Normalize escaped \n sequences stored in DB
+                  p: ({ children }) => (
+                    <p className="mb-4 leading-relaxed">
+                      {typeof children === "string"
+                        ? children.replace(/\\n/g, "\n")
+                        : children}
+                    </p>
+                  ),
+                }}
+              >
+                {post.content.replace(/\\n/g, "\n")}
+              </ReactMarkdown>
             </div>
 
             {/* Back to Blog Button */}
