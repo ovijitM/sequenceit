@@ -24,6 +24,7 @@ import TermsOfService from "./pages/TermsOfService";
 import CookiePolicy from "./pages/CookiePolicy";
 import Careers from "./pages/Careers";
 import Blog from "./pages/Blog";
+import BlogPost from "./pages/BlogPost";
 import Documentation from "./pages/Documentation";
 import CaseStudies from "./pages/CaseStudies";
 import Support from "./pages/Support";
@@ -44,6 +45,7 @@ const App = () => (
             <Route path="/projects" element={<AllProjects />} />
             <Route path="/careers" element={<Careers />} />
             <Route path="/blog" element={<Blog />} />
+            <Route path="/blog/:slug" element={<BlogPost />} />
             <Route path="/documentation" element={<Documentation />} />
             <Route path="/case-studies" element={<CaseStudies />} />
             <Route path="/support" element={<Support />} />

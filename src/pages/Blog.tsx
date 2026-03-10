@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -22,11 +23,17 @@ interface BlogPost {
 }
 
 const Blog = () => {
+  const navigate = useNavigate();
   const [allPosts, setAllPosts] = useState<BlogPost[]>([]);
   const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
   const [categories, setCategories] = useState<string[]>([]);
   const [activeCategory, setActiveCategory] = useState("All");
   const [isLoading, setIsLoading] = useState(true);
+
+  const handleReadMore = (postId: string, title: string) => {
+    const slug = `${title.toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "")}-${postId.slice(0, 8)}`;
+    navigate(`/blog/${slug}`, { state: { postId } });
+  };
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -148,7 +155,7 @@ const Blog = () => {
                           <span className="flex items-center gap-2"><Calendar className="w-4 h-4" />{formatDate(featuredPost.created_at)}</span>
                           <span className="flex items-center gap-2"><Clock className="w-4 h-4" />{featuredPost.read_time}</span>
                         </div>
-                        <Button className="w-fit group">
+                        <Button className="w-fit group" onClick={() => handleReadMore(featuredPost.id, featuredPost.title)}>
                           Read More <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
                         </Button>
                       </div>
@@ -186,7 +193,7 @@ const Blog = () => {
                             <span className="flex items-center gap-1"><Calendar className="w-3 h-3" />{formatDate(post.created_at)}</span>
                             <span className="flex items-center gap-1"><Clock className="w-3 h-3" />{post.read_time}</span>
                           </div>
-                          <Button variant="outline" className="w-full group">
+                          <Button variant="outline" className="w-full group" onClick={() => handleReadMore(post.id, post.title)}>
                             Read Article <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
                           </Button>
                         </CardContent>
