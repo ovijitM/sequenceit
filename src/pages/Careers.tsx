@@ -1,16 +1,47 @@
+import { useState, useEffect } from "react";
+import { supabase } from "@/integrations/supabase/client";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { MapPin, Clock, Briefcase, ArrowRight } from "lucide-react";
+import { MapPin, Briefcase, ArrowRight, Loader2 } from "lucide-react";
+
+interface Career {
+  id: string;
+  title: string;
+  department: string;
+  location: string;
+  type: string;
+  description: string;
+  requirements: string[];
+  published: boolean;
+  created_at: string;
+}
 
 const Careers = () => {
-  // TODO: Fetch open positions from database
-  const openPositions: any[] = [];
+  const [openPositions, setOpenPositions] = useState<Career[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
-  // TODO: Fetch benefits from database
-  const benefits: any[] = [];
+  useEffect(() => {
+    const fetchCareers = async () => {
+      try {
+        const db = supabase as any;
+        const { data, error } = await db
+          .from("careers")
+          .select("*")
+          .eq("published", true)
+          .order("created_at", { ascending: false });
+        if (error) throw error;
+        setOpenPositions(data || []);
+      } catch (err) {
+        console.error("Error fetching careers:", err);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    fetchCareers();
+  }, []);
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -20,9 +51,7 @@ const Careers = () => {
         <section className="py-20 bg-gradient-to-br from-primary/5 via-background to-primary/5">
           <div className="container mx-auto px-4 lg:px-8">
             <div className="max-w-3xl mx-auto text-center">
-              <h1 className="font-display text-4xl md:text-6xl font-bold mb-6">
-                Join Our Team
-              </h1>
+              <h1 className="font-display text-4xl md:text-6xl font-bold mb-6">Join Our Team</h1>
               <p className="text-xl text-muted-foreground mb-8">
                 Build the future with us. We're always looking for talented individuals who are passionate about technology and innovation.
               </p>
@@ -30,48 +59,26 @@ const Careers = () => {
           </div>
         </section>
 
-        {/* Benefits Section */}
-        {benefits.length > 0 && (
-          <section className="py-16 bg-muted/30">
-            <div className="container mx-auto px-4 lg:px-8">
-              <div className="text-center mb-12">
-                <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">
-                  Why Work With Us?
-                </h2>
-                <p className="text-muted-foreground max-w-2xl mx-auto">
-                  We believe in creating an environment where our team can thrive and do their best work.
-                </p>
-              </div>
-
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {benefits.map((benefit, index) => (
-                  <Card key={index} className="border-2 hover:border-primary/50 transition-colors">
-                    <CardHeader>
-                      <CardTitle className="text-xl">{benefit.title}</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <p className="text-muted-foreground">{benefit.description}</p>
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
-            </div>
-          </section>
-        )}
-
         {/* Open Positions Section */}
-        {openPositions.length > 0 && (
-          <section className="py-16">
-            <div className="container mx-auto px-4 lg:px-8">
-              <div className="text-center mb-12">
-                <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">
-                  Open Positions
-                </h2>
-                <p className="text-muted-foreground max-w-2xl mx-auto">
-                  Explore our current openings and find your perfect role.
-                </p>
-              </div>
+        <section className="py-16">
+          <div className="container mx-auto px-4 lg:px-8">
+            <div className="text-center mb-12">
+              <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">Open Positions</h2>
+              <p className="text-muted-foreground max-w-2xl mx-auto">
+                Explore our current openings and find your perfect role.
+              </p>
+            </div>
 
+            {isLoading ? (
+              <div className="flex items-center justify-center py-20">
+                <Loader2 className="w-10 h-10 animate-spin text-primary" />
+              </div>
+            ) : openPositions.length === 0 ? (
+              <div className="text-center py-20 text-muted-foreground">
+                <p className="text-xl">No open positions at this time.</p>
+                <p className="mt-2">Check back soon or send us a general application below.</p>
+              </div>
+            ) : (
               <div className="grid gap-6 max-w-5xl mx-auto">
                 {openPositions.map((position) => (
                   <Card key={position.id} className="border-2 hover:border-primary/50 transition-all hover:shadow-lg">
@@ -79,40 +86,35 @@ const Careers = () => {
                       <div className="flex flex-wrap items-start justify-between gap-4">
                         <div>
                           <CardTitle className="text-2xl mb-2">{position.title}</CardTitle>
-                          <CardDescription className="text-base">
-                            {position.description}
-                          </CardDescription>
+                          <CardDescription className="text-base">{position.description}</CardDescription>
                         </div>
                         <Badge variant="secondary" className="text-sm px-3 py-1">
                           {position.department}
                         </Badge>
                       </div>
-                      
                       <div className="flex flex-wrap gap-4 text-sm text-muted-foreground mt-4">
-                        <div className="flex items-center gap-2">
-                          <MapPin className="w-4 h-4" />
-                          {position.location}
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <Briefcase className="w-4 h-4" />
-                          {position.type}
-                        </div>
+                        <span className="flex items-center gap-2">
+                          <MapPin className="w-4 h-4" />{position.location}
+                        </span>
+                        <span className="flex items-center gap-2">
+                          <Briefcase className="w-4 h-4" />{position.type}
+                        </span>
                       </div>
                     </CardHeader>
-                    
                     <CardContent>
-                      <div className="mb-6">
-                        <h4 className="font-semibold mb-3">Requirements:</h4>
-                        <ul className="space-y-2">
-                          {position.requirements.map((req, idx) => (
-                            <li key={idx} className="text-muted-foreground flex items-start gap-2">
-                              <span className="text-primary mt-1">•</span>
-                              <span>{req}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                      
+                      {position.requirements && position.requirements.length > 0 && (
+                        <div className="mb-6">
+                          <h4 className="font-semibold mb-3">Requirements:</h4>
+                          <ul className="space-y-2">
+                            {position.requirements.map((req, idx) => (
+                              <li key={idx} className="text-muted-foreground flex items-start gap-2">
+                                <span className="text-primary mt-1">•</span>
+                                <span>{req}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
                       <Button className="w-full sm:w-auto group">
                         Apply Now
                         <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -121,9 +123,9 @@ const Careers = () => {
                   </Card>
                 ))}
               </div>
-            </div>
-          </section>
-        )}
+            )}
+          </div>
+        </section>
 
         {/* CTA Section */}
         <section className="py-20 bg-gradient-primary">
