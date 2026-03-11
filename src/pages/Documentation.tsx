@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -39,9 +40,15 @@ const categoryIconMap: Record<string, React.ElementType> = {
 };
 
 const Documentation = () => {
+  const navigate = useNavigate();
   const [docs, setDocs] = useState<Doc[]>([]);
   const [search, setSearch] = useState("");
   const [isLoading, setIsLoading] = useState(true);
+
+  const handleDocClick = (doc: Doc) => {
+    const slug = `${doc.title.toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "")}-${doc.id.slice(0, 8)}`;
+    navigate(`/documentation/${slug}`, { state: { docId: doc.id } });
+  };
 
   useEffect(() => {
     const fetchDocs = async () => {
@@ -138,7 +145,9 @@ const Documentation = () => {
                         <ul className="space-y-3">
                           {items.map((doc) => (
                             <li key={doc.id}>
-                              <button className="text-sm text-muted-foreground hover:text-primary transition-colors flex items-center gap-2 group text-left w-full">
+                              <button
+                                onClick={() => handleDocClick(doc)}
+                                className="text-sm text-muted-foreground hover:text-primary transition-colors flex items-center gap-2 group text-left w-full">
                                 <ArrowRight className="w-4 h-4 opacity-0 -ml-6 group-hover:opacity-100 group-hover:ml-0 transition-all shrink-0" />
                                 {doc.title}
                               </button>

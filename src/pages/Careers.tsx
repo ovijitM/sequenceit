@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -20,8 +21,14 @@ interface Career {
 }
 
 const Careers = () => {
+  const navigate = useNavigate();
   const [openPositions, setOpenPositions] = useState<Career[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+
+  const handleApply = (job: Career) => {
+    const slug = `${job.title.toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "")}-${job.id.slice(0, 8)}`;
+    navigate(`/careers/${slug}/apply`, { state: { jobId: job.id } });
+  };
 
   useEffect(() => {
     const fetchCareers = async () => {
@@ -115,7 +122,7 @@ const Careers = () => {
                           </ul>
                         </div>
                       )}
-                      <Button className="w-full sm:w-auto group">
+                      <Button className="w-full sm:w-auto group" onClick={() => handleApply(position)}>
                         Apply Now
                         <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
                       </Button>

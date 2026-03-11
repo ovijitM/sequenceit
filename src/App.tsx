@@ -25,7 +25,9 @@ import CookiePolicy from "./pages/CookiePolicy";
 import Careers from "./pages/Careers";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
+import CareerApply from "./pages/CareerApply";
 import Documentation from "./pages/Documentation";
+import DocumentationArticle from "./pages/DocumentationArticle";
 import CaseStudies from "./pages/CaseStudies";
 import Support from "./pages/Support";
 import FAQs from "./pages/FAQs";
@@ -44,9 +46,11 @@ const App = () => (
             <Route path="/" element={<Index />} />
             <Route path="/projects" element={<AllProjects />} />
             <Route path="/careers" element={<Careers />} />
+            <Route path="/careers/:slug/apply" element={<CareerApply />} />
             <Route path="/blog" element={<Blog />} />
             <Route path="/blog/:slug" element={<BlogPost />} />
             <Route path="/documentation" element={<Documentation />} />
+            <Route path="/documentation/:slug" element={<DocumentationArticle />} />
             <Route path="/case-studies" element={<CaseStudies />} />
             <Route path="/support" element={<Support />} />
             <Route path="/faqs" element={<FAQs />} />
